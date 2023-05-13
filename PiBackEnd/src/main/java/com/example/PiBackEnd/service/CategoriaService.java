@@ -1,6 +1,6 @@
 package com.example.PiBackEnd.service;
 
-import com.example.PiBackEnd.domain.Categoria;
+/*import com.example.PiBackEnd.domain.Categoria;
 import com.example.PiBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PiBackEnd.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +24,4 @@ public class CategoriaService {
             return categoriaRepository.save(categoria);
         }
     }
-}
+}*/

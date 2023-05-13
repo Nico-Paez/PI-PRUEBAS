@@ -1,6 +1,6 @@
 package com.example.PiBackEnd.controller;
 
-import com.example.PiBackEnd.domain.Categoria;
+/*import com.example.PiBackEnd.domain.Categoria;
 import com.example.PiBackEnd.exceptions.ResourceBadRequestException;
 import com.example.PiBackEnd.repository.CategoriaRepository;
 import com.example.PiBackEnd.service.CategoriaService;
@@ -29,4 +29,4 @@ public class CategoriaController {
     public List<Categoria> categorias(){
         return categoriaRepository.findAll();
     }
-}
+}*/

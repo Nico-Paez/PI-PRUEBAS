@@ -2,11 +2,14 @@ package com.example.PiBackEnd.controller;
 
 import com.example.PiBackEnd.domain.Pelicula;
 import com.example.PiBackEnd.exceptions.ResourceBadRequestException;
+import com.example.PiBackEnd.exceptions.ResourceNoContentException;
 import com.example.PiBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PiBackEnd.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/peliculas")
@@ -29,6 +32,11 @@ public class PeliculaController {
     public ResponseEntity<Pelicula> agregarCategoriaAPelicula(@PathVariable Long peliculaId, @PathVariable Long categoriaId){
         return ResponseEntity.ok(peliculaService.agregarCategoriaAPelicula(peliculaId,categoriaId));
     }*/
+
+    @GetMapping
+    public ResponseEntity<List<Pelicula>> buscarTodosOdontologos() throws ResourceNoContentException {
+        return ResponseEntity.ok(peliculaService.buscarTodasPeliculas());
+    }
 
     @PutMapping("/{peliculaId}/categorias/{categoria}")
     public ResponseEntity<Pelicula> agregarCategoriaAPeliculas(@PathVariable Long peliculaId, @PathVariable String categoria){
