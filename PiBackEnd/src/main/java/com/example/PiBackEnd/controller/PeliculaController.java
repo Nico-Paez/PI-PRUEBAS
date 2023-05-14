@@ -8,7 +8,7 @@ import com.example.PiBackEnd.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,28 +18,45 @@ public class PeliculaController {
     @Autowired
     private PeliculaService peliculaService;
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarPelicula(@PathVariable Long id) throws ResourceNotFoundException {
+        peliculaService.eliminarPelicula(id);
+        return ResponseEntity.ok("Eliminación de la Pelicula con id = " + id + " con éxito");
+    }
+
     @PostMapping
-    public ResponseEntity<Pelicula> guardarOdontologo(@RequestBody Pelicula pelicula) throws ResourceBadRequestException {
+    public ResponseEntity<Pelicula> guardarPelicula(@RequestBody Pelicula pelicula) throws ResourceBadRequestException {
         return ResponseEntity.ok(peliculaService.guardarPelicula(pelicula));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pelicula> buscarOdontologo(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Pelicula> buscarPelicula(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(peliculaService.buscarPelicula(id).get());
     }
 
-    /*@PutMapping("/{peliculaId}/categorias/{categoriaId}")
-    public ResponseEntity<Pelicula> agregarCategoriaAPelicula(@PathVariable Long peliculaId, @PathVariable Long categoriaId){
-        return ResponseEntity.ok(peliculaService.agregarCategoriaAPelicula(peliculaId,categoriaId));
-    }*/
+    @GetMapping("/titulo/{titulo}")
+    public ResponseEntity<Pelicula> buscarPeliculaPorTitulo(@PathVariable String titulo) throws ResourceNotFoundException {
+        return ResponseEntity.ok(peliculaService.buscarPeliculaPorTitulo(titulo).get());
+    }
 
     @GetMapping
-    public ResponseEntity<List<Pelicula>> buscarTodosOdontologos() throws ResourceNoContentException {
+    public ResponseEntity<List<Pelicula>> buscarTodasPeliculas() throws ResourceNoContentException {
         return ResponseEntity.ok(peliculaService.buscarTodasPeliculas());
     }
 
-    @PutMapping("/{peliculaId}/categorias/{categoria}")
-    public ResponseEntity<Pelicula> agregarCategoriaAPeliculas(@PathVariable Long peliculaId, @PathVariable String categoria){
-        return ResponseEntity.ok(peliculaService.agregarCategoriaAPeliculas(peliculaId,categoria));
+    @GetMapping("/fecha/{fechaString}")
+    public ResponseEntity<List<Pelicula>> buscarPeliculasPorFecha(@PathVariable String fechaString) throws ResourceNoContentException {
+        LocalDate fecha = LocalDate.parse(fechaString);
+        return ResponseEntity.ok(peliculaService.buscarPeliculasPorFecha(fecha));
+    }
+
+    @PutMapping
+    public ResponseEntity<Pelicula> actualizarPelicula(@RequestBody Pelicula pelicula) throws ResourceBadRequestException, ResourceNotFoundException {
+        return ResponseEntity.ok(peliculaService.actualizarPelicula(pelicula));
+    }
+
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<List<Pelicula>> buscarPeliculasPorCategoria(@PathVariable String categoria) throws ResourceNoContentException {
+        return ResponseEntity.ok(peliculaService.buscarPeliculasPorCategoria(categoria));
     }
 }

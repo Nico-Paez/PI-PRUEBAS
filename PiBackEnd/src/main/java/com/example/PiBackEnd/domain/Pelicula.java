@@ -21,7 +21,7 @@ public class Pelicula {
     @Column
     private String descripcion;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST })
     @JoinTable(
             name = "pelicula_categoria",
             joinColumns = { @JoinColumn(name = "pelicula_id") },
@@ -29,16 +29,16 @@ public class Pelicula {
     )
     private Set<Categoria> categorias = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST })
     @JoinTable(
             name = "pelicula_fecha",
             joinColumns = { @JoinColumn(name = "pelicula_id") },
             inverseJoinColumns = { @JoinColumn(name = "fecha_id") }
     )
-    private Set<Categoria> fechas = new HashSet<>();
+    private Set<Fecha> fechas = new HashSet<>();
 
     public Boolean chequearAtributosVacios(){
-        if(null == this.titulo || null == this.imagen || null == this.descripcion){
+        if(null == this.titulo || null == this.imagen || null == this.descripcion || this.categorias.isEmpty() || this.fechas.isEmpty()){
             return true;
         }
         return false;
@@ -86,5 +86,13 @@ public class Pelicula {
 
     public void setCategorias(Set<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Set<Fecha> getFechas() {
+        return fechas;
+    }
+
+    public void setFechas(Set<Fecha> fechas) {
+        this.fechas = fechas;
     }
 }

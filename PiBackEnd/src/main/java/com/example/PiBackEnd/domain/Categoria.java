@@ -35,4 +35,12 @@ public class Categoria {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public Set<Pelicula> getPeliculas() {
+        return peliculas;
+    }
+
+    public void setPeliculas(Set<Pelicula> peliculas) {
+        this.peliculas = peliculas;
+    }
 }
