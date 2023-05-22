@@ -1,6 +1,6 @@
 package com.example.PiBackEnd.controller;
 
-/*import com.example.PiBackEnd.domain.Fecha;
+import com.example.PiBackEnd.domain.Fecha;
 import com.example.PiBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PiBackEnd.service.FechaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +21,4 @@ public class FechaController {
     public ResponseEntity<Fecha> buscarFecha(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(fechaService.buscarFecha(id).get());
     }
-}*/
+}

@@ -6,6 +6,8 @@ import com.example.PiBackEnd.exceptions.ResourceNoContentException;
 import com.example.PiBackEnd.exceptions.ResourceNotFoundException;
 import com.example.PiBackEnd.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
@@ -13,13 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/peliculas")
+@CrossOrigin
 public class PeliculaController {
 
     @Autowired
     private PeliculaService peliculaService;
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarPelicula(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> eliminarPelicula(@PathVariable Long id) throws ResourceNotFoundException, ResourceBadRequestException {
         peliculaService.eliminarPelicula(id);
         return ResponseEntity.ok("Eliminación de la Pelicula con id = " + id + " con éxito");
     }
@@ -58,5 +61,10 @@ public class PeliculaController {
     @GetMapping("/categoria/{categoria}")
     public ResponseEntity<List<Pelicula>> buscarPeliculasPorCategoria(@PathVariable String categoria) throws ResourceNoContentException {
         return ResponseEntity.ok(peliculaService.buscarPeliculasPorCategoria(categoria));
+    }
+
+    @GetMapping("/pagina/{pagina}")
+    public ResponseEntity<Page<Pelicula>> paginacion(@PathVariable Integer pagina){
+        return ResponseEntity.ok(peliculaService.paginacion(PageRequest.of(pagina,10)));
     }
 }

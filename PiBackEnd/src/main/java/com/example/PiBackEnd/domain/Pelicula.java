@@ -21,6 +21,9 @@ public class Pelicula {
     @Column
     private String descripcion;
 
+    @Column
+    private Boolean vigente;
+
     @ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST })
     @JoinTable(
             name = "pelicula_categoria",
@@ -94,5 +97,13 @@ public class Pelicula {
 
     public void setFechas(Set<Fecha> fechas) {
         this.fechas = fechas;
+    }
+
+    public Boolean getVigente() {
+        return vigente;
+    }
+
+    public void setVigente(Boolean vigente) {
+        this.vigente = vigente;
     }
 }

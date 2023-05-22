@@ -14,12 +14,22 @@ public class Fecha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate fecha;
 
+
+    //@JsonIgnoreProperties("fechas")
     @JsonIgnore
     @ManyToMany(mappedBy = "fechas")
     private Set<Pelicula> peliculas = new HashSet<>();
+
+    /*@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
+    @JoinTable(
+            name = "fecha_hora",
+            joinColumns = { @JoinColumn(name = "fecha_id") },
+            inverseJoinColumns = { @JoinColumn(name = "hora_id") }
+    )
+    private Set<Horario> horarios = new HashSet<>();*/
 
     public Long getId() {
         return id;
@@ -44,4 +54,12 @@ public class Fecha {
     public void setPeliculas(Set<Pelicula> peliculas) {
         this.peliculas = peliculas;
     }
+
+    /*public Set<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(Set<Horario> horarios) {
+        this.horarios = horarios;
+    }*/
 }
