@@ -30,6 +30,10 @@ public class PeliculaService {
         this.fechaService = fechaService;
     }
 
+    public Pelicula asd(Pelicula pelicula){
+        return pelicula;
+    }
+
     public Pelicula guardarPelicula(Pelicula pelicula) throws ResourceBadRequestException {
         logger.info("Guardando Pelicula nueva");
         if (pelicula.chequearAtributosVacios()) {
